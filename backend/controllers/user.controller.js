@@ -1,6 +1,8 @@
 const userModel = require('../models/user.model');
 const userService = require('../services/user.service');
 const { validationResult } = require('express-validator');
+const blacklistTokenModel = require('../models/blacklistToken.model');  
+
 
 module.exports.registerUser = async (req, res, next) => {
 
@@ -58,11 +60,29 @@ module.exports.loginUser = async (req, res, next) => {
      }
     
      const token = user.generateAuthToken();
-    
+        // Assuming generateAuthToken is a method in your user model that generates a JWT token
+
+    res.cookie('token', token);
+
+
      res.status(200).json({
           user,
           token
      }); 
 };
 
+module.exports.getUserProfile = async (req, res, next) => {
+    res.status(200).json(req.user);
+};
 
+module.exports.logoutUser = async (req, res, next) => {
+    res.clearCookie('token');
+
+    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+
+    await blacklistTokenModel.create({ token });
+    // Store the token in the blacklist to prevent further access
+
+    
+    res.status(200).json({ message: 'Logged out successfully' });
+};
