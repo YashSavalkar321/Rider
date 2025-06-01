@@ -10,5 +10,10 @@ router.post('/register', [
 ]
 , userController.registerUser);
 
+router.post('/login', [
+    body('email').isEmail().withMessage('Please enter a valid email address'),
+    body('password').notEmpty().withMessage('Password cannot be empty'),
+], userController.loginUser);
+
 
 module.exports = router;
