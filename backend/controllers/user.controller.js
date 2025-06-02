@@ -43,6 +43,12 @@ module.exports.loginUser = async (req, res, next) => {
      }
     
      const { email, password } = req.body;
+
+     const isUserExists = await userModel.findOne({ email });
+        if (isUserExists) {
+            return res.status(400).json({ message: 'User with this email already exists' });
+        }
+        
     
      const user = await userModel.findOne({email}).select('+password');
      // Using select('+password') to include the password field in the query result
