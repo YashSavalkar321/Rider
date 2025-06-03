@@ -324,3 +324,131 @@ This endpoint logs out the authenticated user by clearing the authentication coo
 curl -X GET http://localhost:3000/users/logout \
   -H "Authorization: Bearer <your_jwt_token>"
 ```
+
+---
+
+## Captain Profile Endpoint
+
+`GET /captains/profile`
+
+---
+
+### Description
+
+This endpoint returns the authenticated captain's profile information. The request must include a valid JWT token (usually sent as a cookie or in the `Authorization` header).
+
+---
+
+### Authentication
+
+- Requires a valid JWT token (sent as a cookie named `token` or as a Bearer token in the `Authorization` header).
+
+---
+
+### Responses
+
+#### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+    ```json
+    {
+      "_id": "captain_id_here",
+      "fullname": {
+        "firstname": "John",
+        "lastname": "Doe"
+      },
+      "email": "john.doe@example.com",
+      "status": "active",
+      "vehicle": {
+        "color": "Red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "location": {
+        "lat": 12.9716,
+        "lng": 77.5946
+      }
+    }
+    ```
+
+#### Unauthorized
+
+- **Status Code:** `401 Unauthorized`
+- **Body:**
+    ```json
+    {
+      "message": "Access denied. No token provided."
+    }
+    ```
+
+#### Invalid/Blacklisted Token
+
+- **Status Code:** `403 Forbidden`
+- **Body:**
+    ```json
+    {
+      "message": "Token is blacklisted. Please log in again."
+    }
+    ```
+
+---
+
+### Example Request
+
+```bash
+curl -X GET http://localhost:4000/captains/profile \
+  -H "Authorization: Bearer <your_jwt_token>"
+```
+
+---
+
+## Captain Logout Endpoint
+
+`GET /captains/logout`
+
+---
+
+### Description
+
+This endpoint logs out the authenticated captain by clearing the authentication cookie and blacklisting the JWT token.
+
+---
+
+### Authentication
+
+- Requires a valid JWT token (sent as a cookie named `token` or as a Bearer token in the `Authorization` header).
+
+---
+
+### Responses
+
+#### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+    ```json
+    {
+      "message": "Logged out successfully"
+    }
+    ```
+
+#### Unauthorized
+
+- **Status Code:** `401 Unauthorized`
+- **Body:**
+    ```json
+    {
+      "message": "Access denied. No token provided."
+    }
+    ```
+
+---
+
+### Example Request
+
+```bash
+curl -X GET http://localhost:4000/captains/logout \
+  -H "Authorization: Bearer <your_jwt_token>"
+```
