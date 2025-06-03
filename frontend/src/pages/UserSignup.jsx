@@ -32,8 +32,8 @@ const UserSignup = () => {
     <div className='p-7 h-screen flex flex-col justify-between'>
       <div>
         <img
-          className='w-16 mb-10'
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYQy-OIkA6In0fTvVwZADPmFFibjmszu2A0g&s"
+          className='w-30 mb-10'
+          src="https://i.pinimg.com/736x/f5/31/9e/f5319e97db5ee8f4a50a9a4dc072ae69.jpg"
           alt=""
         />
 

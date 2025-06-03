@@ -32,8 +32,8 @@ const CaptainSignup = () => {
     <div className='p-7 h-screen flex flex-col justify-between'>
       <div>
         <img
-          className='w-16 mb-10'
-          src="https://pngimg.com/d/uber_PNG24.png"
+          className='w-30 mb-10'
+          src="https://i.pinimg.com/736x/f5/31/9e/f5319e97db5ee8f4a50a9a4dc072ae69.jpg"
           alt=""
         />
 
